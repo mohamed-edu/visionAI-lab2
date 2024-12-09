@@ -1,0 +1,102 @@
+﻿@model visionAI_lab2.Models.ImageAnalysis
+@{
+    ViewBag.Title = "Image Analysis Result";
+}
+
+<div class="container my-5">
+    <h2 class="text-center text-primary mb-4">@ViewBag.Title</h2>
+
+    <div class="row">
+        <div class="col-md-8 mb-4">
+            <!-- Description Card -->
+            <div class="card border-primary mb-3 shadow-sm">
+                <div class="card-header bg-primary text-white">Description</div>
+                <div class="card-body">
+                    <p class="card-text">@Model.Description</p>
+                </div>
+            </div>
+
+            <!-- Tags Card -->
+            <div class="card border-success mb-3 shadow-sm">
+                <div class="card-header bg-success text-white">Tags</div>
+                <div class="card-body">
+                    @if (Model.Tags != null && Model.Tags.Any())
+                    {
+                        <ul class="list-inline">
+                            @foreach (var tag in Model.Tags)
+                            {
+                                <li class="list-inline-item">
+                                    <span class="badge bg-success text-white">@tag</span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No tags available.</p>
+                    }
+                </div>
+            </div>
+
+            <!-- Categories Card -->
+            <div class="card border-info mb-3 shadow-sm">
+                <div class="card-header bg-info text-white">Categories</div>
+                <div class="card-body">
+                    @if (Model.Categories != null && Model.Categories.Any())
+                    {
+                        <ul class="list-inline">
+                            @foreach (var category in Model.Categories)
+                            {
+                                <li class="list-inline-item">
+                                    <span class="badge bg-info text-white">@category</span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No categories available.</p>
+                    }
+                </div>
+            </div>
+
+            <!-- Objects Card -->
+            <div class="card border-warning mb-3 shadow-sm">
+                <div class="card-header bg-warning text-dark">Objects</div>
+                <div class="card-body">
+                    @if (Model.Objects != null && Model.Objects.Any())
+                    {
+                        <ul class="list-inline">
+                            @foreach (var obj in Model.Objects)
+                            {
+                                <li class="list-inline-item">
+                                    <span class="badge bg-warning text-dark">@obj</span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No objects detected.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Thumbnail Column -->
+        @if (!string.IsNullOrEmpty(Model.ThumbnailUrl))
+        {
+            <div class="col-md-4">
+                <div class="card border-secondary shadow-sm">
+                    <div class="card-header bg-secondary text-white">Thumbnail</div>
+                    <div class="card-body text-center">
+                        <p class="card-text">
+                            Your thumbnail has been saved to <strong>WWWROOT/thumbnails</strong>.
+                        </p>
+                        <img src="@Model.ThumbnailUrl" alt="Thumbnail" class="img-fluid rounded border" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

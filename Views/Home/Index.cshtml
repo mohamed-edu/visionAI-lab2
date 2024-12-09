@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Image Analysis";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h1 class="h3 m-0">@ViewBag.Title</h1>
+                </div>
+                <div class="card-body text-center">
+                    <h3 class="mb-3">Upload an image</h3>
+                    
+                    @using (Html.BeginForm("AnalyzeImage", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                        <div class="mb-3 text-start">
+                            <label for="file" class="form-label">Or Upload a File</label>
+                            <input type="file" class="form-control" id="file" name="file" />
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label for="thumbnailWidth" class="form-label">Thumbnail Width</label>
+                            <input type="number" class="form-control" id="thumbnailWidth" name="thumbnailWidth" value="500" />
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label for="thumbnailHeight" class="form-label">Thumbnail Height</label>
+                            <input type="number" class="form-control" id="thumbnailHeight" name="thumbnailHeight" value="500" />
+                        </div>
+
+                        <div class="d-grid">
+                            <input type="submit" class="btn btn-primary btn-lg" value="Analyze Image" />
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        <div class="alert alert-danger mt-4">
+                            @ViewBag.ErrorMessage
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
